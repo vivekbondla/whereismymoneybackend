@@ -1,10 +1,10 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-
+console.log(process.env.DB_USER,process.env.DB_PWD,process.env.DB_NAME)
 const mongoose = require("mongoose");
 const URL =
-  "mongodb+srv://vivek:V2i2v0e7k@cluster0.thpnk.mongodb.net/whereismymoney?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0.thpnk.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 const HttpError = require("./Models/http-error");
 const signupRoute = require("./routes/authentication");
@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   );
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE');
 
-  next();
+  next(); 
 });
 
 //this is the entry point for the server
